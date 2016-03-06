@@ -3,24 +3,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const slack = require('./slack-web-hook');
+const handlebars = require('express-handlebars')
 
 function init() {
   const app = express();
   app.use(bodyParser());
   
+  app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+  app.set('view engine', 'handlebars');
+  app.set('views', __dirname + '/views');
+  
   function register(route, name, emoji, defaultMessage) {
     console.log('registering ' + name + ' at ' + route + ' - ' + defaultMessage);
     
     app.get(route, (request, response) => {
-      let formView = '<html><body>' +
-        '<form method="post" action="' + route + '">' +
-          '<label for="to">to: </label>' +
-          '<input type="text" name="to" id="to" /><br />' +
-          '<label for="message">message: </label><br />' +
-          '<textarea name="message" id="message" rows="10" cols="50">' + defaultMessage +'"</textarea><br />' +
-          '<input type="submit" value="Say">' +
-        '</form></body></html>';
-      response.send(formView);
+      response.render('slack-say', {
+        route,
+        name,
+        defaultMessage
+      });
     });
     
     app.post(route, (request, response) => {
