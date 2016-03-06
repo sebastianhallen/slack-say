@@ -11,28 +11,30 @@ function init() {
   
   app.engine('handlebars', handlebars({defaultLayout: 'main'}));
   app.set('view engine', 'handlebars');
-  app.set('views', __dirname + '/views');
+  app.set('views', './views');
+  app.use('/assets', express.static('assets'));
   
-  function register(route, name, emoji, defaultMessage) {
-    console.log('registering ' + name + ' at ' + route + ' - ' + defaultMessage);
+  function register(options) {
+    console.log('registering ' + options.name + ' at ' + options.route + ' - ' + options.defaultMessage);
     
-    app.get(route, (request, response) => {
+    app.get(options.route, (request, response) => {
       response.render('slack-say', {
-        route,
-        name,
-        defaultMessage
+        route: options.route,
+        name: options.name,
+        defaultMessage: options.defaultMessage,
+        additionalScripts: options.additionalScripts || []
       });
     });
     
-    app.post(route, (request, response) => {
+    app.post(options.route, (request, response) => {
       const message = request.body.message;
       const to = request.body.to;
       console.log(to + ': ' + message);
       
-      slack.send(message, name, to, emoji)
+      slack.send(options.message, options.name, options.to, options.emoji)
         .then(result => {
           console.log('message sent: ' + result);
-          response.redirect(route + '?result=' + result + '&message=' + message + '&to=' + to);
+          response.redirect(options.route + '?result=' + result + '&message=' + message + '&to=' + to);
         });
     });
   }

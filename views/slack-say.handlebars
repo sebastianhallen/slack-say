@@ -2,3 +2,19 @@
 
 {{> say-form}}
 {{> help}}
+
+<script type="text/javascript">
+  function loadScript(script) {
+    var element = document.createElement('script');
+    element.src = '/assets/' + script;
+    document.body.appendChild(element);
+  }
+  
+  function loadScripts() {
+    {{#each additionalScripts}}
+      loadScript('{{this}}');
+    {{/each}}
+  }
+
+  window.addEventListener('load', loadScripts, false);
+</script>
