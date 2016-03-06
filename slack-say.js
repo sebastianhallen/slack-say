@@ -30,7 +30,10 @@ function init() {
       console.log(to + ': ' + message);
       
       slack.send(message, name, to, emoji)
-        .then(result => response.redirect(route + '?result=' + result + '&message=' + message + '&to=' + to));
+        .then(result => {
+          console.log('message sent: ' + result);
+          response.redirect(route + '?result=' + result + '&message=' + message + '&to=' + to);
+        });
     });
   }
   

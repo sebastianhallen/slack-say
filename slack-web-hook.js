@@ -18,11 +18,11 @@ function send(message, as, to, emoji) {
     json: true 
   };
   
-  return request(requestOptions)
-    .then(result => {
-      console.log(result);
-      return result;
-    });
+//  return new Promise(resolve => {
+//    console.log(payload);
+//    resolve(payload);
+//  })
+  return request(requestOptions);
 }
 
 module.exports.send = send;
