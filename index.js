@@ -1,6 +1,8 @@
 'use strict';
 
-const lillePreben = require('./lib/lille-preben');
+const slack = require('./lib/slack-say')();
+
+slack.register('/lille-preben', 'Lille Preben', ':lillepreben:');
 
 console.log('kan jeg hjelpe deg med noget?');
-lillePreben.listen(3000);
+slack.start();
