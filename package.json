@@ -9,6 +9,9 @@
   },
   "author": "Sebastian Hallén",
   "license": "copyright",
+  "engines": {
+    "node": "5.6.0"
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
