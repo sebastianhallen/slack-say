@@ -31,7 +31,7 @@ function init() {
       const to = request.body.to;
       console.log(to + ': ' + message);
       
-      slack.send(options.message, options.name, options.to, options.emoji)
+      slack.send(message, options.name, to, options.emoji)
         .then(result => {
           console.log('message sent: ' + result);
           response.redirect(options.route + '?result=' + result + '&message=' + message + '&to=' + to);

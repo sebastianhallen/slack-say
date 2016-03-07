@@ -17,7 +17,7 @@ function send(message, as, to, emoji) {
     body: payload,
     json: true 
   };
-  
+
 //  return new Promise(resolve => {
 //    console.log(payload);
 //    resolve(payload);
