@@ -5,6 +5,27 @@
     <title>{{name}} says</title>
 </head>
 <body>
+<script type="text/javascript">
+  function queryString() {
+    return window.location.search.substring(1).split('&')
+      .reduce(function(previous, current) {
+        var keyValuePair = current.split('=', 2),
+            key = keyValuePair[0];
+            value = decodeURIComponent(keyValuePair[1]);
+
+        if (previous[key]) {
+          if (!Array.isArray(previous[key])) {
+            previous[key] = [previous[key]];
+          } 
+          previous[key].push(value);
+        }
+        else {
+          previous[key] = value;
+        }
+        return previous;
+      }, {});
+  }
+</script>
 
     {{{body}}}
 

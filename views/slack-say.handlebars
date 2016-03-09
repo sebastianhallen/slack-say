@@ -4,6 +4,17 @@
 {{> help}}
 
 <script type="text/javascript">
+  var query = queryString();
+  if (query.error) {
+    var error = document.createElement('p');
+    error.textContent = 'Failed to send message: ' + query.error;
+    error.style.background = '#a01100';
+    error.style.color = '#fff';
+    document.body.appendChild(error);
+  }
+</script>
+
+<script type="text/javascript">
   function loadScript(script) {
     var element = document.createElement('script');
     element.src = '/assets/' + script;

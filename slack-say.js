@@ -35,6 +35,10 @@ function init() {
         .then(result => {
           console.log('message sent: ' + result);
           response.redirect(options.route + '?result=' + result + '&message=' + message + '&to=' + to);
+        })
+        .catch(result => {
+          console.log('failed to send message: ' + result);
+          response.redirect(options.route + '?result=' + result + '&message=' + message + '&to=' + to + '&error=' + result);
         });
     });
   }
