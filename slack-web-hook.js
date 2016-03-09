@@ -17,11 +17,10 @@ function send(message, as, to, emoji) {
     body: payload,
     json: true 
   };
-
-//  return new Promise(resolve => {
-//    console.log(payload);
-//    resolve(payload);
-//  })
+  
+  if (!to) {
+    return new Promise((resolve, reject) => reject('no channel specified'));
+  }
   return request(requestOptions);
 }
 
