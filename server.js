@@ -15,12 +15,18 @@ slack.register({
   name: 'Lumberg',
   emoji: ':lumbergh:',
   defaultMessage: 'Yeaahhh... If you can come in Saturday that would be great.'
-})
+});
 
 slack.register({
   route: '/tobot',
   name: 'Tobot',
   emoji: ':tobot:'
-})
+});
+
+slack.register({
+  route: '/bertil',
+  name: 'Bertil',
+  emoji: ':bertil:'
+});
 
 slack.start();
